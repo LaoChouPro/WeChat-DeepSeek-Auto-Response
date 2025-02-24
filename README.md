@@ -1,5 +1,5 @@
 # WeChat-DeepSeek-Auto-Response
-这是一个非侵入式的微信自动回复程序，使用0风险，调用deepseek（或其它）API，基于OCR识别进行自动回复。
+这是一个基于视觉的、非侵入式的微信自动回复程序，使用0封号风险，调用deepseek（或其它）API，基于OCR识别进行自动回复。
 
 该项目是一个基于Python的微信自动回复工具，利用了图像识别、OCR（光学字符识别）、鼠标监听和AI接口来实现自动回复功能。
 程序通过捕获指定区域的屏幕截图，识别其中的文本内容，并通过调用AI接口生成合适的回复。
@@ -37,7 +37,7 @@ pip install pyautogui pyperclip pynput pillow easyocr opencv-python openai
 
 ### 获取API密钥
 
-本工具通过DeepSeek AI接口提供自动回复功能。你需要在[DeepSeek](https://api.deepseek.com)注册并获取API密钥。将密钥替换在代码中的`client = OpenAI(api_key="YOUR_API_KEY", base_url="https://api.deepseek.com")`部分。
+本工具通过DeepSeek AI接口提供自动回复功能。你需要在[DeepSeek](https://https://deepseek.com)注册并获取API密钥。将密钥替换在代码中的`client = OpenAI(api_key="YOUR_API_KEY", base_url="https://api.deepseek.com")`部分。
 
 ### 使用步骤
 
@@ -47,23 +47,23 @@ pip install pyautogui pyperclip pynput pillow easyocr opencv-python openai
 4. 自动将回复复制到剪贴板并发送到微信界面。
 
 ### 运行程序
+您可以运行Auto_choose_new_sender.py ,它可以自动回复刚刚发送消息的人。如果此时有其它人发来了消息，它也会自动切换新发的人进行回复。
+使用该程序时，应该点击四下屏幕，分别为：
+1. 点击需要识别对方发送消息的内容位置的矩形的左上角；
+2. 点击需要识别对方发送消息的内容位置的矩形的右下角；
+3. 点击左侧用户栏中，最新会话的用户所处的位置（也就是最顶上）
+4. 点击聊天窗口的信息输入位置。
 
-在命令行中运行以下命令启动程序：
-
-```bash
-python wechat_auto_reply.py
-```
-或直接运行程序，观察终端输出。
-
-### 退出程序
-
-按 `Ctrl+C` 可以停止程序。
+win 和 macOS上的区别仅在于应用粘贴时，时command键还是ctrl键。
+Auto_choose_new_sender.py可以在win上直接运行。
+直接运行程序，观察终端输出。
 
 ## 代码解释
 
 ### 1. 区域选择与鼠标监听
 
 通过`pynput`库监听鼠标事件，捕获两次点击的坐标，用于选择要监视的屏幕区域。
+这个区域最好是人新发消息的文字区域，可以保证最好地仅识别对方发来的文字内容。
 
 ### 2. 图像预处理
 
@@ -94,6 +94,7 @@ python wechat_auto_reply.py
 - 确保你已经授权AI接口的API密钥。
 - 调整`compare_images`函数中的阈值以适应不同的屏幕和内容变化。
 - 程序适用于任何可用的屏幕区域，只要该区域内有明确的文本显示。
+- 本程序使用时没有任何封号风险，因为它是纯基于视觉的，而非侵入式回复。
 
 ## 贡献
 
